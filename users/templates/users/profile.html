@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_filters %}  <!-- by this one we are allowed to use crispy filter in our forms -->
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>
+        <div class="media  mt-4">
+            {% if user.profile.bio == None %}
+                <p></p>
+            {% else %}
+                Bio : <p class="ml-2">{{ user.profile.bio }}</p>
+            {% endif %}
+        </div>
+        <div class="media">
+            {% if user.profile.website == None %}
+                <p></p>
+            {% else %}
+                Website : <p class="ml-2"><a href="{{ user.profile.website }}">{{ user.profile.website }}</a></p>
+            {% endif %}
+        </div>
+        <div class="media">
+            <div class="form-group">
+                <a class="btn btn-outline-info" href="{% url 'profile-update' %}">Update Profile</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
